@@ -1,151 +1,248 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curso de Língua Russa » Vem a Mim Lingua Russa 2024</title>
-<style>
-body {
- font-family: Arial, sans-serif;
- margin: 0;
- padding: 0;
- background-size: cover;
- background-position: top;
- background-repeat: no-repeat;
- min-height: 100vh;
-}
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curso de Língua Russa » Vem a Mim Lingua Russa 2025</title>
+    <link rel="icon" href="img/icon_site.png" type="image/x-icon" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-/* IMAGEM PARA PC */
-body{
- background-image: url('https://i.ibb.co/M9TZ11j/IMG-20241024-201309.webp');}
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("img/site_pc.png");
+        background-size: cover;
+        background-position: center top;
+        min-height: 200vh; /* Garantir que a página seja alta o suficiente para rolar */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow-x: hidden; /* Impede o scroll horizontal */
+      }
 
-/* IMAGEM PARA CELULAR */
-@media (max-width: 1280px){
-body{
- background-image: url('https://i.ibb.co/1Zv6Jhr/IMG-20241024-201455.webp');}
-}
+      /* Clarear o fundo do site */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(80, 80, 80, 0.348);
+        z-index: 999;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease; /* Suaviza o aparecimento do overlay */
+      }
 
-/* Clarear o fundo do site */
-.overlay {
- position: fixed;
- top: 0;
- left: 0;
- width: 100%;
- height: 100%;
- background-color: rgba(255, 255, 255, 0.7);
- z-index: 999;
- display: none;
-}
+      /* Estilo do pop-up */
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8); /* Inicia com um tamanho reduzido */
+        background-color: white;
+        width: 90%;
+        max-width: 600px;
+        padding: 2%;
+        box-shadow: #000 0 0 20px;
+        z-index: 1000;
+        border-radius: 10px;
+        text-align: center;
+        display: none;
+        opacity: 0; /* Inicia invisível */
+        transition: opacity 0.5s ease, transform 0.5s ease; /* Animação suave */
+      }
 
-/* Estilo do pop-up */
-.popup {
- position: fixed;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- background-color: white;
- width: 90%; /* Responsivo */
- max-width: 400px; /* Tamanho máximo */
- padding: 20px;
- box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
- z-index: 1000;
- border-radius: 10px;
- text-align: center;
- display: none;
-}
+      /* Ícone de fechar */
+      .close-btn {
+        position: absolute;
+        right: 16px;
+        top: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
 
-/* Ícone de fechar */
-.popup .close-btn {
- position: absolute;
- top: 10px;
- right: 15px;
- font-size: 16px;
- font-weight: bold;
- cursor: default; /* Não deixa fechar */
-}
+      .close-btn:hover {
+        transform: scale(0.99);
+        text-decoration: underline;
+      }
 
-/* Estilo dos botões */
-.btn {
- padding: 10px 15px;
- margin: 10px 5px 0 5px;
- border: none;
- cursor: pointer;
- flex: 1; /* Para que os botões cresçam igual */
-}
+      .popup p {
+        text-align: justify;
+        padding: 4%;
+      }
 
-.btn-preferencias {
- background-color: lightgray;
-}
+      .popup h1 {
+        font-size: 28px;
+      }
 
-.btn-aceito {
- background-color: green;
- color: white;
-}
+      /* Estilo dos botões */
+      .btn {
+        padding: 10px 15px;
+        margin: 10px 5px 0 5px;
+        border: none;
+        cursor: pointer;
+        flex: 1;
+        box-shadow: #00000034 2px 3px 2px;
+      }
+      .btn:hover {
+        transform: scale(1.02);
+      }
 
-/* Container para os botões */
-.button-container {
- display: flex; /* Flexbox para alinhar os botões */
- justify-content: center; /* Centraliza os botões */
+      .btn-preferencias {
+        background-color: lightgray;
+      }
+
+      .btn-aceito {
+        background-color: rgb(0, 155, 0);
+        font-weight: bold;
+        color: white;
+      }
+
+      /* Container para os botões */
+      .button-container {
+        display: flex;
+        justify-content: center;
+      }
+
+      /* Responsividade */
+      @media (max-width: 768px) {
+        body {
+          background-image: url("img/site_mobile.png");
+          background-size: cover; /* Garantir que a imagem ocupe a tela inteira */
+          background-position: center top;
+          min-height: 100vh; /* Ajusta a altura mínima para garantir que a tela ocupe o espaço completo */
+          overflow-y: auto; /* Permite rolagem vertical no mobile */
         }
 
-/* Link do pop-up */
-.popup a {
- position: absolute;
- top: 0;
- left: 0;
- right: 0;
- bottom: 0;
- display: block;
- text-decoration: none;
- color: inherit;
-}
+        .popup {
+          max-width: 400px;
+          width: 80%;
+          padding: 6% 3% 4% 3%;
+          box-shadow: #000 0 0 20px;
+        }
 
-/* Responsividade */
-@media (max-width: 768px){
-.popup {
- width: 85%; /* Largura para telas pequenas */
- padding: 15px; /* Ajuste do padding */
- margin-top: 50%;
-}
+        .btn {
+          border-radius: 5px;
+          padding: 10px;
+          box-shadow: #00000034 2px 3px 2px;
+          font-size: 16px;
+        }
 
-.btn {
- border-radius: 3px;
- padding: 10px; /* Botões menores */
-}}
-</style>
-</head>
-<body>
-<div class="overlay"></div>
+        .close-btn {
+          position: absolute;
+          right: 16px;
+          top: 10px;
+          margin-bottom: 10px;
+        }
+        .btn-aceito {
+          font-weight: bold;
+          color: white;
+        }
+      }
 
-<div class="popup">
- <span class="close-btn">X</span>
- <h2>POLÍTICA DE COOKIES</h2>
- <p>Este site utiliza cookies para garantir que você tenha a melhor experiência em nosso site. Ao continuar navegando, você concorda com o uso de cookies.</p>
-  <div class="button-container">
-   <button class="btn btn-preferencias">Preferências</button>
-   <button class="btn btn-aceito">Aceito</button>
-   </div>
-</div>
+      /* Responsividade para tablet */
+      @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+          background-image: url("img/site_tablet.png"); /* Se tiver uma imagem diferente para tablet */
+          background-size: cover;
+          background-position: center top;
+          min-height: 100vh; /* Garante que ocupe toda a altura da tela */
+          overflow-y: auto;
+        }
 
-<script>
- function showPopup() {
-  const overlay = document.querySelector('.overlay');
-  const popup = document.querySelector('.popup');
-        
-    overlay.style.display = 'block';
-    popup.style.display = 'block';
- }
+        .popup {
+          width: 70%;
+          padding: 5%;
+          box-shadow: #000 0 0 20px;
+        }
 
- function setPopupRedirect(link) {
-  const popup = document.querySelector('.popup');
-        
-  popup.addEventListener('click', function() {window.location.href = link;});
- }
+        .btn {
+          font-size: 16px; /* Ajustar o tamanho da fonte dos botões */
+          padding: 12px 20px;
+        }
 
-    window.onload = function() {
-        setTimeout(showPopup, 1000);
-        setPopupRedirect("https://go.hotmart.com/J91529203X");
-    };
-</script>
-</body>
+        .popup h1 {
+          font-size: 24px; /* Ajustar o tamanho do título */
+        }
+
+        .popup p {
+          font-size: 16px; /* Ajustar o tamanho do texto */
+        }
+
+        .button-container {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .btn {
+          width: 80%;
+          margin: 5px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Overlay que cobre a tela toda -->
+    <div class="overlay"></div>
+
+    <!-- Pop-up de cookies -->
+    <div class="popup">
+      <span class="close-btn">Fechar</span>
+      <h1>Política de cookies</h1>
+      <p>
+        Utilizamos cookies para proporcionar a melhor experiência no nosso site,
+        personalizar conteúdo, analisar o tráfego e melhorar a navegação. Ao
+        continuar a navegar, você concorda com o uso desses cookies. Você pode
+        gerenciar suas preferências a qualquer momento.
+      </p>
+
+      <div class="button-container">
+        <button class="btn btn-preferencias">Ignorar</button>
+        <button class="btn btn-aceito">Continuar</button>
+      </div>
+    </div>
+
+    <script>
+      function showPopup() {
+        const overlay = document.querySelector(".overlay");
+        const popup = document.querySelector(".popup");
+
+        // Exibir overlay e popup com animação
+        overlay.style.display = "block";
+        popup.style.display = "block";
+
+        // Atrasar a transição para garantir que a animação aconteça
+        setTimeout(() => {
+          overlay.style.opacity = "1"; // Fade-in do overlay
+          popup.style.opacity = "1"; // Fade-in do pop-up
+          popup.style.transform = "translate(-50%, -50%) scale(1)"; // Pop-up se move para a posição e aumenta a escala
+        }, 10); // Um pequeno delay para garantir que o display seja "block" antes da animação
+
+        // Função para redirecionamento com links diferentes
+        const redirectToLink = (element, url) => {
+          element.addEventListener("touchstart", () => {
+            window.location.href = url;
+          });
+          element.addEventListener("click", () => {
+            window.location.href = url;
+          });
+        };
+
+        // Redirecionar overlay para um link e popup para outro link
+        redirectToLink(overlay, "https://go.hotmart.com/J91529203X");
+        redirectToLink(popup, "https://go.hotmart.com/J91529203X");
+      }
+
+      window.onload = function () {
+        setTimeout(showPopup, 500);
+      };
+    </script>
+  </body>
 </html>
