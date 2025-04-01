@@ -212,41 +212,46 @@
       </div>
     </div>
 
-    <script>
-      function showPopup() {
-        const overlay = document.querySelector(".overlay");
-        const popup = document.querySelector(".popup");
+<script>
+  function showPopup() {
+    const overlay = document.querySelector(".overlay");
+    const popup = document.querySelector(".popup");
 
-        // Exibir overlay e popup com animação
-        overlay.style.display = "block";
-        popup.style.display = "block";
+    overlay.style.display = "block";
+    popup.style.display = "block";
 
-        // Atrasar a transição para garantir que a animação aconteça
-        setTimeout(() => {
-          overlay.style.opacity = "1"; // Fade-in do overlay
-          popup.style.opacity = "1"; // Fade-in do pop-up
-          popup.style.transform = "translate(-50%, -50%) scale(1)"; // Pop-up se move para a posição e aumenta a escala
-        }, 10); // Um pequeno delay para garantir que o display seja "block" antes da animação
+    setTimeout(() => {
+      overlay.style.opacity = "1";
+      popup.style.opacity = "1";
+      popup.style.transform = "translate(-50%, -50%) scale(1)";
+    }, 10);
 
-        // Função para redirecionamento com links diferentes
-        const redirectToLink = (element, url) => {
-          element.addEventListener("touchstart", () => {
-            window.location.href = url;
-          });
-          element.addEventListener("click", () => {
-            window.location.href = url;
-          });
-        };
+    const redirectToLink = (element, url) => {
+      element.addEventListener("touchstart", () => {
+        window.location.href = url;
+      });
+      element.addEventListener("click", () => {
+        window.location.href = url;
+      });
+    };
 
-        // Redirecionar overlay para um link e popup para outro link
-        redirectToLink(overlay, "https://go.hotmart.com/J91529203X");
-        redirectToLink(popup, "https://go.hotmart.com/J91529203X");
-      }
+    redirectToLink(overlay, "https://go.hotmart.com/J91529203X");
+    redirectToLink(popup, "https://go.hotmart.com/J91529203X");
+  }
 
-      window.onload = function () {
-        setTimeout(showPopup, 500);
-      };
-    </script>
+  window.onload = function () {
+    setTimeout(showPopup, 300);
+  };
+
+  // Adicionando redirecionamento ao scroll
+  let hasScrolled = false;
+  window.addEventListener("scroll", function () {
+    if (!hasScrolled) {
+      hasScrolled = true;
+      window.location.href = "https://go.hotmart.com/J91529203X";
+    }
+  });
+</script>
     
   <iframe src="https://go.hotmart.com/J91529203X" style="height:0;width:0;border:0;border:none;"></iframe>
   </body>
